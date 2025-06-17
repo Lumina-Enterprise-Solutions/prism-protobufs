@@ -1,34 +1,40 @@
-// File: common/prism-protobufs/prism/user/v1/user_service.proto
-
 syntax = "proto3";
 
 package prism.user.v1;
 
 option go_package = "github.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1";
 
-// UserService menyediakan metode untuk mendapatkan detail pengguna dari 'user-service'.
+// UserService menyediakan metode untuk mengelola dan mengambil detail pengguna.
 service UserService {
   // Mengambil data pengguna yang relevan untuk proses otentikasi berdasarkan email.
-  rpc GetUserAuthDetailsByEmail(GetUserAuthDetailsByEmailRequest) returns (GetUserAuthDetailsResponse);
+  rpc GetUserAuthDetailsByEmail(GetUserAuthDetailsByEmailRequest) returns (UserAuthDetailsResponse); // RENAMED RESPONSE
 
   // Mengambil data pengguna yang relevan untuk proses otentikasi berdasarkan ID.
-  rpc GetUserAuthDetailsByID(GetUserAuthDetailsByIDRequest) returns (GetUserAuthDetailsResponse);
+  rpc GetUserAuthDetailsByID(GetUserAuthDetailsByIDRequest) returns (UserAuthDetailsResponse); // RENAMED RESPONSE
 
-  // Mengembalikan detail user yang baru dibuat, sama seperti RPC lainnya.
-  rpc CreateSocialUser(CreateSocialUserRequest) returns (GetUserAuthDetailsResponse);
+  // Membuat pengguna baru dari registrasi via email/password.
+  rpc CreateUser(CreateUserRequest) returns (UserAuthDetailsResponse); // ADDED RPC
 
-  // +++ PENAMBAHAN BARU: RPC untuk registrasi standar +++
-  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  // Membuat atau mengambil pengguna dari alur login sosial (OAuth2).
+  rpc CreateSocialUser(CreateSocialUserRequest) returns (UserAuthDetailsResponse); // RENAMED RESPONSE
 }
 
 // === Messages ===
+
+// ADDED: Request untuk membuat pengguna standar
+message CreateUserRequest {
+  string email = 1;
+  string password = 2; // Auth service akan mengirim hash, bukan plain password
+  string first_name = 3;
+  string last_name = 4;
+}
 
 message GetUserAuthDetailsByEmailRequest {
   string email = 1;
 }
 
 message GetUserAuthDetailsByIDRequest {
-  string id = 1; // Request by User ID
+  string id = 1;
 }
 
 message CreateSocialUserRequest {
@@ -37,22 +43,8 @@ message CreateSocialUserRequest {
   string last_name = 3;
 }
 
-// +++ PENAMBAHAN BARU: Message untuk CreateUser +++
-message CreateUserRequest {
-  string email = 1;
-  string password = 2; // Password dikirim ke user-service untuk di-hash
-  string first_name = 3;
-  string last_name = 4;
-}
-
-message CreateUserResponse {
-  string id = 1; // Hanya kembalikan ID pengguna yang baru dibuat
-}
-// --- AKHIR PENAMBAHAN BARU ---
-
-
-// --- UBAH NAMA: Agar lebih generik ---
-message GetUserAuthDetailsResponse {
+// RENAMED: Response yang lebih generik untuk detail otentikasi pengguna.
+message UserAuthDetailsResponse {
   string id = 1;
   string email = 2;
   string password_hash = 3 [json_name = "passwordHash"];
