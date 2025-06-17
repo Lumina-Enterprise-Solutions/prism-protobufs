@@ -25,10 +25,7 @@ const (
 // UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// User Service akan menyediakan metode untuk mendapatkan detail pengguna.
 type UserServiceClient interface {
-	// Mengambil detail pengguna berdasarkan email untuk keperluan otentikasi.
 	GetUserAuthDetailsByEmail(ctx context.Context, in *GetUserAuthDetailsByEmailRequest, opts ...grpc.CallOption) (*GetUserAuthDetailsByEmailResponse, error)
 }
 
@@ -53,10 +50,7 @@ func (c *userServiceClient) GetUserAuthDetailsByEmail(ctx context.Context, in *G
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
-//
-// User Service akan menyediakan metode untuk mendapatkan detail pengguna.
 type UserServiceServer interface {
-	// Mengambil detail pengguna berdasarkan email untuk keperluan otentikasi.
 	GetUserAuthDetailsByEmail(context.Context, *GetUserAuthDetailsByEmailRequest) (*GetUserAuthDetailsByEmailResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }

@@ -66,14 +66,15 @@ func (x *GetUserAuthDetailsByEmailRequest) GetEmail() string {
 }
 
 type GetUserAuthDetailsByEmailResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	PasswordHash  string                 `protobuf:"bytes,3,opt,name=password_hash,json=passwordHash,proto3" json:"password_hash,omitempty"`
-	RoleName      string                 `protobuf:"bytes,4,opt,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
-	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	Is_2FaEnabled bool                   `protobuf:"varint,6,opt,name=is_2fa_enabled,json=is2faEnabled,proto3" json:"is_2fa_enabled,omitempty"`
-	TotpSecret    string                 `protobuf:"bytes,7,opt,name=totp_secret,json=totpSecret,proto3" json:"totp_secret,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Id           string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Email        string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	PasswordHash string                 `protobuf:"bytes,3,opt,name=password_hash,json=passwordHash,proto3" json:"password_hash,omitempty"`
+	RoleName     string                 `protobuf:"bytes,4,opt,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
+	Status       string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	// ---- Pastikan namanya seperti ini ----
+	Is_2FaEnabled bool   `protobuf:"varint,6,opt,name=is_2fa_enabled,json=is2faEnabled,proto3" json:"is_2fa_enabled,omitempty"`
+	TotpSecret    string `protobuf:"bytes,7,opt,name=totp_secret,json=totpSecret,proto3" json:"totp_secret,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

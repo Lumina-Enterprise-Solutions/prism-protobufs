@@ -4,13 +4,9 @@ package prism.user.v1;
 
 option go_package = "github.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1";
 
-// User Service akan menyediakan metode untuk mendapatkan detail pengguna.
 service UserService {
-  // Mengambil detail pengguna berdasarkan email untuk keperluan otentikasi.
   rpc GetUserAuthDetailsByEmail(GetUserAuthDetailsByEmailRequest) returns (GetUserAuthDetailsByEmailResponse);
 }
-
-// === Messages ===
 
 message GetUserAuthDetailsByEmailRequest {
   string email = 1;
@@ -22,6 +18,7 @@ message GetUserAuthDetailsByEmailResponse {
   string password_hash = 3;
   string role_name = 4;
   string status = 5;
+  // ---- Pastikan namanya seperti ini ----
   bool is_2fa_enabled = 6;
   string totp_secret = 7;
 }
