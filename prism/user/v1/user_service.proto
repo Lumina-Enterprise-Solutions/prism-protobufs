@@ -4,21 +4,38 @@ package prism.user.v1;
 
 option go_package = "github.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1";
 
+// UserService menyediakan metode untuk mendapatkan detail pengguna dari 'user-service'.
 service UserService {
+  // Mengambil data pengguna yang relevan untuk proses otentikasi berdasarkan email.
   rpc GetUserAuthDetailsByEmail(GetUserAuthDetailsByEmailRequest) returns (GetUserAuthDetailsByEmailResponse);
+
+  // ====================== PENAMBAHAN BARU ======================
+  // Mengambil data pengguna yang relevan untuk proses otentikasi berdasarkan ID.
+  // Ini krusial untuk alur Refresh Token.
+  rpc GetUserAuthDetailsByID(GetUserAuthDetailsByIDRequest) returns (GetUserAuthDetailsByEmailResponse);
+  // ============================================================
 }
+
+// === Messages ===
 
 message GetUserAuthDetailsByEmailRequest {
   string email = 1;
 }
 
+// ====================== PENAMBAHAN BARU ======================
+message GetUserAuthDetailsByIDRequest {
+  string id = 1; // Request by User ID
+}
+// ============================================================
+
+
+// Respon ini bisa digunakan oleh KEDUA RPC di atas karena mengembalikan data yang sama.
 message GetUserAuthDetailsByEmailResponse {
   string id = 1;
   string email = 2;
-  string password_hash = 3;
-  string role_name = 4;
+  string password_hash = 3 [json_name = "passwordHash"];
+  string role_name = 4 [json_name = "roleName"];
   string status = 5;
-  // ---- Pastikan namanya seperti ini ----
-  bool is_2fa_enabled = 6;
-  string totp_secret = 7;
+  bool is_2fa_enabled = 6 [json_name = "is2faEnabled"];
+  string totp_secret = 7 [json_name = "totpSecret"];
 }

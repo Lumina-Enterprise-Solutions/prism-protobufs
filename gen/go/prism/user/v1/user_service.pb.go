@@ -65,23 +65,68 @@ func (x *GetUserAuthDetailsByEmailRequest) GetEmail() string {
 	return ""
 }
 
+// ====================== PENAMBAHAN BARU ======================
+type GetUserAuthDetailsByIDRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` // Request by User ID
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserAuthDetailsByIDRequest) Reset() {
+	*x = GetUserAuthDetailsByIDRequest{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserAuthDetailsByIDRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserAuthDetailsByIDRequest) ProtoMessage() {}
+
+func (x *GetUserAuthDetailsByIDRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserAuthDetailsByIDRequest.ProtoReflect.Descriptor instead.
+func (*GetUserAuthDetailsByIDRequest) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetUserAuthDetailsByIDRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+// Respon ini bisa digunakan oleh KEDUA RPC di atas karena mengembalikan data yang sama.
 type GetUserAuthDetailsByEmailResponse struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	Id           string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Email        string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	PasswordHash string                 `protobuf:"bytes,3,opt,name=password_hash,json=passwordHash,proto3" json:"password_hash,omitempty"`
-	RoleName     string                 `protobuf:"bytes,4,opt,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
-	Status       string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	// ---- Pastikan namanya seperti ini ----
-	Is_2FaEnabled bool   `protobuf:"varint,6,opt,name=is_2fa_enabled,json=is2faEnabled,proto3" json:"is_2fa_enabled,omitempty"`
-	TotpSecret    string `protobuf:"bytes,7,opt,name=totp_secret,json=totpSecret,proto3" json:"totp_secret,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	PasswordHash  string                 `protobuf:"bytes,3,opt,name=password_hash,json=passwordHash,proto3" json:"password_hash,omitempty"`
+	RoleName      string                 `protobuf:"bytes,4,opt,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
+	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Is_2FaEnabled bool                   `protobuf:"varint,6,opt,name=is_2fa_enabled,json=is2faEnabled,proto3" json:"is_2fa_enabled,omitempty"`
+	TotpSecret    string                 `protobuf:"bytes,7,opt,name=totp_secret,json=totpSecret,proto3" json:"totp_secret,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserAuthDetailsByEmailResponse) Reset() {
 	*x = GetUserAuthDetailsByEmailResponse{}
-	mi := &file_prism_user_v1_user_service_proto_msgTypes[1]
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -93,7 +138,7 @@ func (x *GetUserAuthDetailsByEmailResponse) String() string {
 func (*GetUserAuthDetailsByEmailResponse) ProtoMessage() {}
 
 func (x *GetUserAuthDetailsByEmailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_prism_user_v1_user_service_proto_msgTypes[1]
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,7 +151,7 @@ func (x *GetUserAuthDetailsByEmailResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GetUserAuthDetailsByEmailResponse.ProtoReflect.Descriptor instead.
 func (*GetUserAuthDetailsByEmailResponse) Descriptor() ([]byte, []int) {
-	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{1}
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetUserAuthDetailsByEmailResponse) GetId() string {
@@ -164,7 +209,9 @@ const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\n" +
 	" prism/user/v1/user_service.proto\x12\rprism.user.v1\"8\n" +
 	" GetUserAuthDetailsByEmailRequest\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\"\xea\x01\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\"/\n" +
+	"\x1dGetUserAuthDetailsByIDRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\xea\x01\n" +
 	"!GetUserAuthDetailsByEmailResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12#\n" +
@@ -173,9 +220,10 @@ const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12$\n" +
 	"\x0eis_2fa_enabled\x18\x06 \x01(\bR\fis2faEnabled\x12\x1f\n" +
 	"\vtotp_secret\x18\a \x01(\tR\n" +
-	"totpSecret2\x8d\x01\n" +
+	"totpSecret2\x87\x02\n" +
 	"\vUserService\x12~\n" +
-	"\x19GetUserAuthDetailsByEmail\x12/.prism.user.v1.GetUserAuthDetailsByEmailRequest\x1a0.prism.user.v1.GetUserAuthDetailsByEmailResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
+	"\x19GetUserAuthDetailsByEmail\x12/.prism.user.v1.GetUserAuthDetailsByEmailRequest\x1a0.prism.user.v1.GetUserAuthDetailsByEmailResponse\x12x\n" +
+	"\x16GetUserAuthDetailsByID\x12,.prism.user.v1.GetUserAuthDetailsByIDRequest\x1a0.prism.user.v1.GetUserAuthDetailsByEmailResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
 
 var (
 	file_prism_user_v1_user_service_proto_rawDescOnce sync.Once
@@ -189,16 +237,19 @@ func file_prism_user_v1_user_service_proto_rawDescGZIP() []byte {
 	return file_prism_user_v1_user_service_proto_rawDescData
 }
 
-var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_prism_user_v1_user_service_proto_goTypes = []any{
 	(*GetUserAuthDetailsByEmailRequest)(nil),  // 0: prism.user.v1.GetUserAuthDetailsByEmailRequest
-	(*GetUserAuthDetailsByEmailResponse)(nil), // 1: prism.user.v1.GetUserAuthDetailsByEmailResponse
+	(*GetUserAuthDetailsByIDRequest)(nil),     // 1: prism.user.v1.GetUserAuthDetailsByIDRequest
+	(*GetUserAuthDetailsByEmailResponse)(nil), // 2: prism.user.v1.GetUserAuthDetailsByEmailResponse
 }
 var file_prism_user_v1_user_service_proto_depIdxs = []int32{
 	0, // 0: prism.user.v1.UserService.GetUserAuthDetailsByEmail:input_type -> prism.user.v1.GetUserAuthDetailsByEmailRequest
-	1, // 1: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.GetUserAuthDetailsByEmailResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	1, // 1: prism.user.v1.UserService.GetUserAuthDetailsByID:input_type -> prism.user.v1.GetUserAuthDetailsByIDRequest
+	2, // 2: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.GetUserAuthDetailsByEmailResponse
+	2, // 3: prism.user.v1.UserService.GetUserAuthDetailsByID:output_type -> prism.user.v1.GetUserAuthDetailsByEmailResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -215,7 +266,7 @@ func file_prism_user_v1_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_prism_user_v1_user_service_proto_rawDesc), len(file_prism_user_v1_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
