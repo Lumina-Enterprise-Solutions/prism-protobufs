@@ -1,3 +1,5 @@
+// File: common/prism-protobufs/prism/user/v1/user_service.proto
+
 syntax = "proto3";
 
 package prism.user.v1;
@@ -7,13 +9,16 @@ option go_package = "github.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/
 // UserService menyediakan metode untuk mendapatkan detail pengguna dari 'user-service'.
 service UserService {
   // Mengambil data pengguna yang relevan untuk proses otentikasi berdasarkan email.
-  rpc GetUserAuthDetailsByEmail(GetUserAuthDetailsByEmailRequest) returns (GetUserAuthDetailsByEmailResponse);
+  rpc GetUserAuthDetailsByEmail(GetUserAuthDetailsByEmailRequest) returns (GetUserAuthDetailsResponse);
 
-  // ====================== PENAMBAHAN BARU ======================
   // Mengambil data pengguna yang relevan untuk proses otentikasi berdasarkan ID.
-  // Ini krusial untuk alur Refresh Token.
-  rpc GetUserAuthDetailsByID(GetUserAuthDetailsByIDRequest) returns (GetUserAuthDetailsByEmailResponse);
-  // ============================================================
+  rpc GetUserAuthDetailsByID(GetUserAuthDetailsByIDRequest) returns (GetUserAuthDetailsResponse);
+
+  // Mengembalikan detail user yang baru dibuat, sama seperti RPC lainnya.
+  rpc CreateSocialUser(CreateSocialUserRequest) returns (GetUserAuthDetailsResponse);
+
+  // +++ PENAMBAHAN BARU: RPC untuk registrasi standar +++
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
 }
 
 // === Messages ===
@@ -22,15 +27,32 @@ message GetUserAuthDetailsByEmailRequest {
   string email = 1;
 }
 
-// ====================== PENAMBAHAN BARU ======================
 message GetUserAuthDetailsByIDRequest {
   string id = 1; // Request by User ID
 }
-// ============================================================
+
+message CreateSocialUserRequest {
+  string email = 1;
+  string first_name = 2;
+  string last_name = 3;
+}
+
+// +++ PENAMBAHAN BARU: Message untuk CreateUser +++
+message CreateUserRequest {
+  string email = 1;
+  string password = 2; // Password dikirim ke user-service untuk di-hash
+  string first_name = 3;
+  string last_name = 4;
+}
+
+message CreateUserResponse {
+  string id = 1; // Hanya kembalikan ID pengguna yang baru dibuat
+}
+// --- AKHIR PENAMBAHAN BARU ---
 
 
-// Respon ini bisa digunakan oleh KEDUA RPC di atas karena mengembalikan data yang sama.
-message GetUserAuthDetailsByEmailResponse {
+// --- UBAH NAMA: Agar lebih generik ---
+message GetUserAuthDetailsResponse {
   string id = 1;
   string email = 2;
   string password_hash = 3 [json_name = "passwordHash"];
