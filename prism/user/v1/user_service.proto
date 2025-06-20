@@ -17,6 +17,8 @@ service UserService {
 
   // Membuat atau mengambil pengguna dari alur login sosial (OAuth2).
   rpc CreateSocialUser(CreateSocialUserRequest) returns (UserAuthDetailsResponse); // RENAMED RESPONSE
+
+  rpc GetPermissionsForRole(GetPermissionsForRoleRequest) returns (GetPermissionsForRoleResponse);
 }
 
 // === Messages ===
@@ -52,4 +54,12 @@ message UserAuthDetailsResponse {
   string status = 5;
   bool is_2fa_enabled = 6 [json_name = "is2faEnabled"];
   string totp_secret = 7 [json_name = "totpSecret"];
+}
+
+message GetPermissionsForRoleRequest {
+  string role_name = 1;
+}
+
+message GetPermissionsForRoleResponse {
+  repeated string permissions = 1;
 }

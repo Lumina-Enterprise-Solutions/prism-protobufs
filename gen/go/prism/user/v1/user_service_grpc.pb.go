@@ -23,6 +23,7 @@ const (
 	UserService_GetUserAuthDetailsByID_FullMethodName    = "/prism.user.v1.UserService/GetUserAuthDetailsByID"
 	UserService_CreateUser_FullMethodName                = "/prism.user.v1.UserService/CreateUser"
 	UserService_CreateSocialUser_FullMethodName          = "/prism.user.v1.UserService/CreateSocialUser"
+	UserService_GetPermissionsForRole_FullMethodName     = "/prism.user.v1.UserService/GetPermissionsForRole"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -39,6 +40,7 @@ type UserServiceClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*UserAuthDetailsResponse, error)
 	// Membuat atau mengambil pengguna dari alur login sosial (OAuth2).
 	CreateSocialUser(ctx context.Context, in *CreateSocialUserRequest, opts ...grpc.CallOption) (*UserAuthDetailsResponse, error)
+	GetPermissionsForRole(ctx context.Context, in *GetPermissionsForRoleRequest, opts ...grpc.CallOption) (*GetPermissionsForRoleResponse, error)
 }
 
 type userServiceClient struct {
@@ -89,6 +91,16 @@ func (c *userServiceClient) CreateSocialUser(ctx context.Context, in *CreateSoci
 	return out, nil
 }
 
+func (c *userServiceClient) GetPermissionsForRole(ctx context.Context, in *GetPermissionsForRoleRequest, opts ...grpc.CallOption) (*GetPermissionsForRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPermissionsForRoleResponse)
+	err := c.cc.Invoke(ctx, UserService_GetPermissionsForRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -103,6 +115,7 @@ type UserServiceServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*UserAuthDetailsResponse, error)
 	// Membuat atau mengambil pengguna dari alur login sosial (OAuth2).
 	CreateSocialUser(context.Context, *CreateSocialUserRequest) (*UserAuthDetailsResponse, error)
+	GetPermissionsForRole(context.Context, *GetPermissionsForRoleRequest) (*GetPermissionsForRoleResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -124,6 +137,9 @@ func (UnimplementedUserServiceServer) CreateUser(context.Context, *CreateUserReq
 }
 func (UnimplementedUserServiceServer) CreateSocialUser(context.Context, *CreateSocialUserRequest) (*UserAuthDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSocialUser not implemented")
+}
+func (UnimplementedUserServiceServer) GetPermissionsForRole(context.Context, *GetPermissionsForRoleRequest) (*GetPermissionsForRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPermissionsForRole not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -218,6 +234,24 @@ func _UserService_CreateSocialUser_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_GetPermissionsForRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPermissionsForRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetPermissionsForRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetPermissionsForRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetPermissionsForRole(ctx, req.(*GetPermissionsForRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -240,6 +274,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateSocialUser",
 			Handler:    _UserService_CreateSocialUser_Handler,
+		},
+		{
+			MethodName: "GetPermissionsForRole",
+			Handler:    _UserService_GetPermissionsForRole_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

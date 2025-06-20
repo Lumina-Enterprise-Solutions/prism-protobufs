@@ -331,6 +331,94 @@ func (x *UserAuthDetailsResponse) GetTotpSecret() string {
 	return ""
 }
 
+type GetPermissionsForRoleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RoleName      string                 `protobuf:"bytes,1,opt,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPermissionsForRoleRequest) Reset() {
+	*x = GetPermissionsForRoleRequest{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPermissionsForRoleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPermissionsForRoleRequest) ProtoMessage() {}
+
+func (x *GetPermissionsForRoleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPermissionsForRoleRequest.ProtoReflect.Descriptor instead.
+func (*GetPermissionsForRoleRequest) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetPermissionsForRoleRequest) GetRoleName() string {
+	if x != nil {
+		return x.RoleName
+	}
+	return ""
+}
+
+type GetPermissionsForRoleResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Permissions   []string               `protobuf:"bytes,1,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPermissionsForRoleResponse) Reset() {
+	*x = GetPermissionsForRoleResponse{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPermissionsForRoleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPermissionsForRoleResponse) ProtoMessage() {}
+
+func (x *GetPermissionsForRoleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPermissionsForRoleResponse.ProtoReflect.Descriptor instead.
+func (*GetPermissionsForRoleResponse) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetPermissionsForRoleResponse) GetPermissions() []string {
+	if x != nil {
+		return x.Permissions
+	}
+	return nil
+}
+
 var File_prism_user_v1_user_service_proto protoreflect.FileDescriptor
 
 const file_prism_user_v1_user_service_proto_rawDesc = "" +
@@ -359,13 +447,18 @@ const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12$\n" +
 	"\x0eis_2fa_enabled\x18\x06 \x01(\bR\fis2faEnabled\x12\x1f\n" +
 	"\vtotp_secret\x18\a \x01(\tR\n" +
-	"totpSecret2\xaf\x03\n" +
+	"totpSecret\";\n" +
+	"\x1cGetPermissionsForRoleRequest\x12\x1b\n" +
+	"\trole_name\x18\x01 \x01(\tR\broleName\"A\n" +
+	"\x1dGetPermissionsForRoleResponse\x12 \n" +
+	"\vpermissions\x18\x01 \x03(\tR\vpermissions2\xa3\x04\n" +
 	"\vUserService\x12t\n" +
 	"\x19GetUserAuthDetailsByEmail\x12/.prism.user.v1.GetUserAuthDetailsByEmailRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12n\n" +
 	"\x16GetUserAuthDetailsByID\x12,.prism.user.v1.GetUserAuthDetailsByIDRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12V\n" +
 	"\n" +
 	"CreateUser\x12 .prism.user.v1.CreateUserRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12b\n" +
-	"\x10CreateSocialUser\x12&.prism.user.v1.CreateSocialUserRequest\x1a&.prism.user.v1.UserAuthDetailsResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
+	"\x10CreateSocialUser\x12&.prism.user.v1.CreateSocialUserRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12r\n" +
+	"\x15GetPermissionsForRole\x12+.prism.user.v1.GetPermissionsForRoleRequest\x1a,.prism.user.v1.GetPermissionsForRoleResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
 
 var (
 	file_prism_user_v1_user_service_proto_rawDescOnce sync.Once
@@ -379,25 +472,29 @@ func file_prism_user_v1_user_service_proto_rawDescGZIP() []byte {
 	return file_prism_user_v1_user_service_proto_rawDescData
 }
 
-var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_prism_user_v1_user_service_proto_goTypes = []any{
 	(*CreateUserRequest)(nil),                // 0: prism.user.v1.CreateUserRequest
 	(*GetUserAuthDetailsByEmailRequest)(nil), // 1: prism.user.v1.GetUserAuthDetailsByEmailRequest
 	(*GetUserAuthDetailsByIDRequest)(nil),    // 2: prism.user.v1.GetUserAuthDetailsByIDRequest
 	(*CreateSocialUserRequest)(nil),          // 3: prism.user.v1.CreateSocialUserRequest
 	(*UserAuthDetailsResponse)(nil),          // 4: prism.user.v1.UserAuthDetailsResponse
+	(*GetPermissionsForRoleRequest)(nil),     // 5: prism.user.v1.GetPermissionsForRoleRequest
+	(*GetPermissionsForRoleResponse)(nil),    // 6: prism.user.v1.GetPermissionsForRoleResponse
 }
 var file_prism_user_v1_user_service_proto_depIdxs = []int32{
 	1, // 0: prism.user.v1.UserService.GetUserAuthDetailsByEmail:input_type -> prism.user.v1.GetUserAuthDetailsByEmailRequest
 	2, // 1: prism.user.v1.UserService.GetUserAuthDetailsByID:input_type -> prism.user.v1.GetUserAuthDetailsByIDRequest
 	0, // 2: prism.user.v1.UserService.CreateUser:input_type -> prism.user.v1.CreateUserRequest
 	3, // 3: prism.user.v1.UserService.CreateSocialUser:input_type -> prism.user.v1.CreateSocialUserRequest
-	4, // 4: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4, // 5: prism.user.v1.UserService.GetUserAuthDetailsByID:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4, // 6: prism.user.v1.UserService.CreateUser:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4, // 7: prism.user.v1.UserService.CreateSocialUser:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	5, // 4: prism.user.v1.UserService.GetPermissionsForRole:input_type -> prism.user.v1.GetPermissionsForRoleRequest
+	4, // 5: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4, // 6: prism.user.v1.UserService.GetUserAuthDetailsByID:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4, // 7: prism.user.v1.UserService.CreateUser:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4, // 8: prism.user.v1.UserService.CreateSocialUser:output_type -> prism.user.v1.UserAuthDetailsResponse
+	6, // 9: prism.user.v1.UserService.GetPermissionsForRole:output_type -> prism.user.v1.GetPermissionsForRoleResponse
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -414,7 +511,7 @@ func file_prism_user_v1_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_prism_user_v1_user_service_proto_rawDesc), len(file_prism_user_v1_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
