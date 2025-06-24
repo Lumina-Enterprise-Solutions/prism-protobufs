@@ -19,6 +19,7 @@ service UserService {
   rpc CreateSocialUser(CreateSocialUserRequest) returns (UserAuthDetailsResponse); // RENAMED RESPONSE
 
   rpc GetPermissionsForRole(GetPermissionsForRoleRequest) returns (GetPermissionsForRoleResponse);
+  rpc Enable2FA(Enable2FARequest) returns (Enable2FAResponse);
 }
 
 // === Messages ===
@@ -62,4 +63,12 @@ message GetPermissionsForRoleRequest {
 
 message GetPermissionsForRoleResponse {
   repeated string permissions = 1;
+}
+message Enable2FARequest {
+  string user_id = 1;
+  string totp_secret = 2;
+}
+
+message Enable2FAResponse {
+  bool success = 1;
 }
