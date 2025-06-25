@@ -611,6 +611,186 @@ func (x *UpdatePasswordResponse) GetSuccess() bool {
 	return false
 }
 
+type UpdateUserStatusBulkRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserIds       []string               `protobuf:"bytes,1,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // Status baru yang akan diterapkan (e.g., "suspended", "active")
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserStatusBulkRequest) Reset() {
+	*x = UpdateUserStatusBulkRequest{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserStatusBulkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserStatusBulkRequest) ProtoMessage() {}
+
+func (x *UpdateUserStatusBulkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserStatusBulkRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserStatusBulkRequest) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UpdateUserStatusBulkRequest) GetUserIds() []string {
+	if x != nil {
+		return x.UserIds
+	}
+	return nil
+}
+
+func (x *UpdateUserStatusBulkRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+type BulkOperationResult struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ItemId        string                 `protobuf:"bytes,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	Success       bool                   `protobuf:"varint,2,opt,name=success,proto3" json:"success,omitempty"`
+	ErrorMessage  string                 `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BulkOperationResult) Reset() {
+	*x = BulkOperationResult{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BulkOperationResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BulkOperationResult) ProtoMessage() {}
+
+func (x *BulkOperationResult) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BulkOperationResult.ProtoReflect.Descriptor instead.
+func (*BulkOperationResult) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *BulkOperationResult) GetItemId() string {
+	if x != nil {
+		return x.ItemId
+	}
+	return ""
+}
+
+func (x *BulkOperationResult) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *BulkOperationResult) GetErrorMessage() string {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return ""
+}
+
+type UpdateUserStatusBulkResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	TotalProcessed int32                  `protobuf:"varint,1,opt,name=total_processed,json=totalProcessed,proto3" json:"total_processed,omitempty"`
+	TotalSucceeded int32                  `protobuf:"varint,2,opt,name=total_succeeded,json=totalSucceeded,proto3" json:"total_succeeded,omitempty"`
+	TotalFailed    int32                  `protobuf:"varint,3,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
+	Results        []*BulkOperationResult `protobuf:"bytes,4,rep,name=results,proto3" json:"results,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *UpdateUserStatusBulkResponse) Reset() {
+	*x = UpdateUserStatusBulkResponse{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserStatusBulkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserStatusBulkResponse) ProtoMessage() {}
+
+func (x *UpdateUserStatusBulkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserStatusBulkResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserStatusBulkResponse) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *UpdateUserStatusBulkResponse) GetTotalProcessed() int32 {
+	if x != nil {
+		return x.TotalProcessed
+	}
+	return 0
+}
+
+func (x *UpdateUserStatusBulkResponse) GetTotalSucceeded() int32 {
+	if x != nil {
+		return x.TotalSucceeded
+	}
+	return 0
+}
+
+func (x *UpdateUserStatusBulkResponse) GetTotalFailed() int32 {
+	if x != nil {
+		return x.TotalFailed
+	}
+	return 0
+}
+
+func (x *UpdateUserStatusBulkResponse) GetResults() []*BulkOperationResult {
+	if x != nil {
+		return x.Results
+	}
+	return nil
+}
+
 var File_prism_user_v1_user_service_proto protoreflect.FileDescriptor
 
 const file_prism_user_v1_user_service_proto_rawDesc = "" +
@@ -654,7 +834,19 @@ const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12*\n" +
 	"\x11new_password_hash\x18\x02 \x01(\tR\x0fnewPasswordHash\"2\n" +
 	"\x16UpdatePasswordResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xd2\x05\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"P\n" +
+	"\x1bUpdateUserStatusBulkRequest\x12\x19\n" +
+	"\buser_ids\x18\x01 \x03(\tR\auserIds\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\"m\n" +
+	"\x13BulkOperationResult\x12\x17\n" +
+	"\aitem_id\x18\x01 \x01(\tR\x06itemId\x12\x18\n" +
+	"\asuccess\x18\x02 \x01(\bR\asuccess\x12#\n" +
+	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage\"\xd1\x01\n" +
+	"\x1cUpdateUserStatusBulkResponse\x12'\n" +
+	"\x0ftotal_processed\x18\x01 \x01(\x05R\x0etotalProcessed\x12'\n" +
+	"\x0ftotal_succeeded\x18\x02 \x01(\x05R\x0etotalSucceeded\x12!\n" +
+	"\ftotal_failed\x18\x03 \x01(\x05R\vtotalFailed\x12<\n" +
+	"\aresults\x18\x04 \x03(\v2\".prism.user.v1.BulkOperationResultR\aresults2\xc3\x06\n" +
 	"\vUserService\x12t\n" +
 	"\x19GetUserAuthDetailsByEmail\x12/.prism.user.v1.GetUserAuthDetailsByEmailRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12n\n" +
 	"\x16GetUserAuthDetailsByID\x12,.prism.user.v1.GetUserAuthDetailsByIDRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12V\n" +
@@ -663,7 +855,8 @@ const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\x10CreateSocialUser\x12&.prism.user.v1.CreateSocialUserRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12r\n" +
 	"\x15GetPermissionsForRole\x12+.prism.user.v1.GetPermissionsForRoleRequest\x1a,.prism.user.v1.GetPermissionsForRoleResponse\x12N\n" +
 	"\tEnable2FA\x12\x1f.prism.user.v1.Enable2FARequest\x1a .prism.user.v1.Enable2FAResponse\x12]\n" +
-	"\x0eUpdatePassword\x12$.prism.user.v1.UpdatePasswordRequest\x1a%.prism.user.v1.UpdatePasswordResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
+	"\x0eUpdatePassword\x12$.prism.user.v1.UpdatePasswordRequest\x1a%.prism.user.v1.UpdatePasswordResponse\x12o\n" +
+	"\x14UpdateUserStatusBulk\x12*.prism.user.v1.UpdateUserStatusBulkRequest\x1a+.prism.user.v1.UpdateUserStatusBulkResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
 
 var (
 	file_prism_user_v1_user_service_proto_rawDescOnce sync.Once
@@ -677,7 +870,7 @@ func file_prism_user_v1_user_service_proto_rawDescGZIP() []byte {
 	return file_prism_user_v1_user_service_proto_rawDescData
 }
 
-var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_prism_user_v1_user_service_proto_goTypes = []any{
 	(*CreateUserRequest)(nil),                // 0: prism.user.v1.CreateUserRequest
 	(*GetUserAuthDetailsByEmailRequest)(nil), // 1: prism.user.v1.GetUserAuthDetailsByEmailRequest
@@ -690,27 +883,33 @@ var file_prism_user_v1_user_service_proto_goTypes = []any{
 	(*Enable2FAResponse)(nil),                // 8: prism.user.v1.Enable2FAResponse
 	(*UpdatePasswordRequest)(nil),            // 9: prism.user.v1.UpdatePasswordRequest
 	(*UpdatePasswordResponse)(nil),           // 10: prism.user.v1.UpdatePasswordResponse
+	(*UpdateUserStatusBulkRequest)(nil),      // 11: prism.user.v1.UpdateUserStatusBulkRequest
+	(*BulkOperationResult)(nil),              // 12: prism.user.v1.BulkOperationResult
+	(*UpdateUserStatusBulkResponse)(nil),     // 13: prism.user.v1.UpdateUserStatusBulkResponse
 }
 var file_prism_user_v1_user_service_proto_depIdxs = []int32{
-	1,  // 0: prism.user.v1.UserService.GetUserAuthDetailsByEmail:input_type -> prism.user.v1.GetUserAuthDetailsByEmailRequest
-	2,  // 1: prism.user.v1.UserService.GetUserAuthDetailsByID:input_type -> prism.user.v1.GetUserAuthDetailsByIDRequest
-	0,  // 2: prism.user.v1.UserService.CreateUser:input_type -> prism.user.v1.CreateUserRequest
-	3,  // 3: prism.user.v1.UserService.CreateSocialUser:input_type -> prism.user.v1.CreateSocialUserRequest
-	5,  // 4: prism.user.v1.UserService.GetPermissionsForRole:input_type -> prism.user.v1.GetPermissionsForRoleRequest
-	7,  // 5: prism.user.v1.UserService.Enable2FA:input_type -> prism.user.v1.Enable2FARequest
-	9,  // 6: prism.user.v1.UserService.UpdatePassword:input_type -> prism.user.v1.UpdatePasswordRequest
-	4,  // 7: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4,  // 8: prism.user.v1.UserService.GetUserAuthDetailsByID:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4,  // 9: prism.user.v1.UserService.CreateUser:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4,  // 10: prism.user.v1.UserService.CreateSocialUser:output_type -> prism.user.v1.UserAuthDetailsResponse
-	6,  // 11: prism.user.v1.UserService.GetPermissionsForRole:output_type -> prism.user.v1.GetPermissionsForRoleResponse
-	8,  // 12: prism.user.v1.UserService.Enable2FA:output_type -> prism.user.v1.Enable2FAResponse
-	10, // 13: prism.user.v1.UserService.UpdatePassword:output_type -> prism.user.v1.UpdatePasswordResponse
-	7,  // [7:14] is the sub-list for method output_type
-	0,  // [0:7] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	12, // 0: prism.user.v1.UpdateUserStatusBulkResponse.results:type_name -> prism.user.v1.BulkOperationResult
+	1,  // 1: prism.user.v1.UserService.GetUserAuthDetailsByEmail:input_type -> prism.user.v1.GetUserAuthDetailsByEmailRequest
+	2,  // 2: prism.user.v1.UserService.GetUserAuthDetailsByID:input_type -> prism.user.v1.GetUserAuthDetailsByIDRequest
+	0,  // 3: prism.user.v1.UserService.CreateUser:input_type -> prism.user.v1.CreateUserRequest
+	3,  // 4: prism.user.v1.UserService.CreateSocialUser:input_type -> prism.user.v1.CreateSocialUserRequest
+	5,  // 5: prism.user.v1.UserService.GetPermissionsForRole:input_type -> prism.user.v1.GetPermissionsForRoleRequest
+	7,  // 6: prism.user.v1.UserService.Enable2FA:input_type -> prism.user.v1.Enable2FARequest
+	9,  // 7: prism.user.v1.UserService.UpdatePassword:input_type -> prism.user.v1.UpdatePasswordRequest
+	11, // 8: prism.user.v1.UserService.UpdateUserStatusBulk:input_type -> prism.user.v1.UpdateUserStatusBulkRequest
+	4,  // 9: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4,  // 10: prism.user.v1.UserService.GetUserAuthDetailsByID:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4,  // 11: prism.user.v1.UserService.CreateUser:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4,  // 12: prism.user.v1.UserService.CreateSocialUser:output_type -> prism.user.v1.UserAuthDetailsResponse
+	6,  // 13: prism.user.v1.UserService.GetPermissionsForRole:output_type -> prism.user.v1.GetPermissionsForRoleResponse
+	8,  // 14: prism.user.v1.UserService.Enable2FA:output_type -> prism.user.v1.Enable2FAResponse
+	10, // 15: prism.user.v1.UserService.UpdatePassword:output_type -> prism.user.v1.UpdatePasswordResponse
+	13, // 16: prism.user.v1.UserService.UpdateUserStatusBulk:output_type -> prism.user.v1.UpdateUserStatusBulkResponse
+	9,  // [9:17] is the sub-list for method output_type
+	1,  // [1:9] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_prism_user_v1_user_service_proto_init() }
@@ -724,7 +923,7 @@ func file_prism_user_v1_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_prism_user_v1_user_service_proto_rawDesc), len(file_prism_user_v1_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

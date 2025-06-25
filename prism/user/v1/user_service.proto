@@ -21,6 +21,7 @@ service UserService {
   rpc GetPermissionsForRole(GetPermissionsForRoleRequest) returns (GetPermissionsForRoleResponse);
   rpc Enable2FA(Enable2FARequest) returns (Enable2FAResponse);
   rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
+  rpc UpdateUserStatusBulk(UpdateUserStatusBulkRequest) returns (UpdateUserStatusBulkResponse);
 }
 
 // === Messages ===
@@ -79,4 +80,21 @@ message UpdatePasswordRequest {
 }
 message UpdatePasswordResponse {
   bool success = 1;
+}
+message UpdateUserStatusBulkRequest {
+  repeated string user_ids = 1;
+  string status = 2; // Status baru yang akan diterapkan (e.g., "suspended", "active")
+}
+
+message BulkOperationResult {
+  string item_id = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+
+message UpdateUserStatusBulkResponse {
+  int32 total_processed = 1;
+  int32 total_succeeded = 2;
+  int32 total_failed = 3;
+  repeated BulkOperationResult results = 4;
 }
