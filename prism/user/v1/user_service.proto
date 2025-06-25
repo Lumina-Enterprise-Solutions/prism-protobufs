@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package prism.user.v1;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1";
 
 // UserService menyediakan metode untuk mengelola dan mengambil detail pengguna.
@@ -22,6 +24,7 @@ service UserService {
   rpc Enable2FA(Enable2FARequest) returns (Enable2FAResponse);
   rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
   rpc UpdateUserStatusBulk(UpdateUserStatusBulkRequest) returns (UpdateUserStatusBulkResponse);
+  rpc GenerateImpersonationToken(GenerateImpersonationTokenRequest) returns (GenerateImpersonationTokenResponse);
 }
 
 // === Messages ===
@@ -97,4 +100,19 @@ message UpdateUserStatusBulkResponse {
   int32 total_succeeded = 2;
   int32 total_failed = 3;
   repeated BulkOperationResult results = 4;
+}
+message UserInfoForToken {
+  string id = 1;
+  string email = 2;
+  string role_name = 3;
+}
+
+message GenerateImpersonationTokenRequest {
+  UserInfoForToken target_user = 1; // Info user yang akan ditiru
+  string actor_id = 2;             // ID admin yang melakukan impersonasi
+}
+
+message GenerateImpersonationTokenResponse {
+  string access_token = 1;
+  google.protobuf.Timestamp expires_at = 2;
 }

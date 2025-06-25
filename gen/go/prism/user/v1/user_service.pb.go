@@ -9,6 +9,7 @@ package userv1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -791,11 +792,175 @@ func (x *UpdateUserStatusBulkResponse) GetResults() []*BulkOperationResult {
 	return nil
 }
 
+type UserInfoForToken struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	RoleName      string                 `protobuf:"bytes,3,opt,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserInfoForToken) Reset() {
+	*x = UserInfoForToken{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserInfoForToken) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserInfoForToken) ProtoMessage() {}
+
+func (x *UserInfoForToken) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserInfoForToken.ProtoReflect.Descriptor instead.
+func (*UserInfoForToken) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *UserInfoForToken) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UserInfoForToken) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *UserInfoForToken) GetRoleName() string {
+	if x != nil {
+		return x.RoleName
+	}
+	return ""
+}
+
+type GenerateImpersonationTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TargetUser    *UserInfoForToken      `protobuf:"bytes,1,opt,name=target_user,json=targetUser,proto3" json:"target_user,omitempty"` // Info user yang akan ditiru
+	ActorId       string                 `protobuf:"bytes,2,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`          // ID admin yang melakukan impersonasi
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GenerateImpersonationTokenRequest) Reset() {
+	*x = GenerateImpersonationTokenRequest{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GenerateImpersonationTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateImpersonationTokenRequest) ProtoMessage() {}
+
+func (x *GenerateImpersonationTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateImpersonationTokenRequest.ProtoReflect.Descriptor instead.
+func (*GenerateImpersonationTokenRequest) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GenerateImpersonationTokenRequest) GetTargetUser() *UserInfoForToken {
+	if x != nil {
+		return x.TargetUser
+	}
+	return nil
+}
+
+func (x *GenerateImpersonationTokenRequest) GetActorId() string {
+	if x != nil {
+		return x.ActorId
+	}
+	return ""
+}
+
+type GenerateImpersonationTokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GenerateImpersonationTokenResponse) Reset() {
+	*x = GenerateImpersonationTokenResponse{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GenerateImpersonationTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateImpersonationTokenResponse) ProtoMessage() {}
+
+func (x *GenerateImpersonationTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateImpersonationTokenResponse.ProtoReflect.Descriptor instead.
+func (*GenerateImpersonationTokenResponse) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GenerateImpersonationTokenResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *GenerateImpersonationTokenResponse) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
 var File_prism_user_v1_user_service_proto protoreflect.FileDescriptor
 
 const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	" prism/user/v1/user_service.proto\x12\rprism.user.v1\"\x81\x01\n" +
+	" prism/user/v1/user_service.proto\x12\rprism.user.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x81\x01\n" +
 	"\x11CreateUserRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x1d\n" +
@@ -846,7 +1011,19 @@ const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\x0ftotal_processed\x18\x01 \x01(\x05R\x0etotalProcessed\x12'\n" +
 	"\x0ftotal_succeeded\x18\x02 \x01(\x05R\x0etotalSucceeded\x12!\n" +
 	"\ftotal_failed\x18\x03 \x01(\x05R\vtotalFailed\x12<\n" +
-	"\aresults\x18\x04 \x03(\v2\".prism.user.v1.BulkOperationResultR\aresults2\xc3\x06\n" +
+	"\aresults\x18\x04 \x03(\v2\".prism.user.v1.BulkOperationResultR\aresults\"U\n" +
+	"\x10UserInfoForToken\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1b\n" +
+	"\trole_name\x18\x03 \x01(\tR\broleName\"\x80\x01\n" +
+	"!GenerateImpersonationTokenRequest\x12@\n" +
+	"\vtarget_user\x18\x01 \x01(\v2\x1f.prism.user.v1.UserInfoForTokenR\n" +
+	"targetUser\x12\x19\n" +
+	"\bactor_id\x18\x02 \x01(\tR\aactorId\"\x82\x01\n" +
+	"\"GenerateImpersonationTokenResponse\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x129\n" +
+	"\n" +
+	"expires_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt2\xc7\a\n" +
 	"\vUserService\x12t\n" +
 	"\x19GetUserAuthDetailsByEmail\x12/.prism.user.v1.GetUserAuthDetailsByEmailRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12n\n" +
 	"\x16GetUserAuthDetailsByID\x12,.prism.user.v1.GetUserAuthDetailsByIDRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12V\n" +
@@ -856,7 +1033,8 @@ const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\x15GetPermissionsForRole\x12+.prism.user.v1.GetPermissionsForRoleRequest\x1a,.prism.user.v1.GetPermissionsForRoleResponse\x12N\n" +
 	"\tEnable2FA\x12\x1f.prism.user.v1.Enable2FARequest\x1a .prism.user.v1.Enable2FAResponse\x12]\n" +
 	"\x0eUpdatePassword\x12$.prism.user.v1.UpdatePasswordRequest\x1a%.prism.user.v1.UpdatePasswordResponse\x12o\n" +
-	"\x14UpdateUserStatusBulk\x12*.prism.user.v1.UpdateUserStatusBulkRequest\x1a+.prism.user.v1.UpdateUserStatusBulkResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
+	"\x14UpdateUserStatusBulk\x12*.prism.user.v1.UpdateUserStatusBulkRequest\x1a+.prism.user.v1.UpdateUserStatusBulkResponse\x12\x81\x01\n" +
+	"\x1aGenerateImpersonationToken\x120.prism.user.v1.GenerateImpersonationTokenRequest\x1a1.prism.user.v1.GenerateImpersonationTokenResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
 
 var (
 	file_prism_user_v1_user_service_proto_rawDescOnce sync.Once
@@ -870,46 +1048,54 @@ func file_prism_user_v1_user_service_proto_rawDescGZIP() []byte {
 	return file_prism_user_v1_user_service_proto_rawDescData
 }
 
-var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_prism_user_v1_user_service_proto_goTypes = []any{
-	(*CreateUserRequest)(nil),                // 0: prism.user.v1.CreateUserRequest
-	(*GetUserAuthDetailsByEmailRequest)(nil), // 1: prism.user.v1.GetUserAuthDetailsByEmailRequest
-	(*GetUserAuthDetailsByIDRequest)(nil),    // 2: prism.user.v1.GetUserAuthDetailsByIDRequest
-	(*CreateSocialUserRequest)(nil),          // 3: prism.user.v1.CreateSocialUserRequest
-	(*UserAuthDetailsResponse)(nil),          // 4: prism.user.v1.UserAuthDetailsResponse
-	(*GetPermissionsForRoleRequest)(nil),     // 5: prism.user.v1.GetPermissionsForRoleRequest
-	(*GetPermissionsForRoleResponse)(nil),    // 6: prism.user.v1.GetPermissionsForRoleResponse
-	(*Enable2FARequest)(nil),                 // 7: prism.user.v1.Enable2FARequest
-	(*Enable2FAResponse)(nil),                // 8: prism.user.v1.Enable2FAResponse
-	(*UpdatePasswordRequest)(nil),            // 9: prism.user.v1.UpdatePasswordRequest
-	(*UpdatePasswordResponse)(nil),           // 10: prism.user.v1.UpdatePasswordResponse
-	(*UpdateUserStatusBulkRequest)(nil),      // 11: prism.user.v1.UpdateUserStatusBulkRequest
-	(*BulkOperationResult)(nil),              // 12: prism.user.v1.BulkOperationResult
-	(*UpdateUserStatusBulkResponse)(nil),     // 13: prism.user.v1.UpdateUserStatusBulkResponse
+	(*CreateUserRequest)(nil),                  // 0: prism.user.v1.CreateUserRequest
+	(*GetUserAuthDetailsByEmailRequest)(nil),   // 1: prism.user.v1.GetUserAuthDetailsByEmailRequest
+	(*GetUserAuthDetailsByIDRequest)(nil),      // 2: prism.user.v1.GetUserAuthDetailsByIDRequest
+	(*CreateSocialUserRequest)(nil),            // 3: prism.user.v1.CreateSocialUserRequest
+	(*UserAuthDetailsResponse)(nil),            // 4: prism.user.v1.UserAuthDetailsResponse
+	(*GetPermissionsForRoleRequest)(nil),       // 5: prism.user.v1.GetPermissionsForRoleRequest
+	(*GetPermissionsForRoleResponse)(nil),      // 6: prism.user.v1.GetPermissionsForRoleResponse
+	(*Enable2FARequest)(nil),                   // 7: prism.user.v1.Enable2FARequest
+	(*Enable2FAResponse)(nil),                  // 8: prism.user.v1.Enable2FAResponse
+	(*UpdatePasswordRequest)(nil),              // 9: prism.user.v1.UpdatePasswordRequest
+	(*UpdatePasswordResponse)(nil),             // 10: prism.user.v1.UpdatePasswordResponse
+	(*UpdateUserStatusBulkRequest)(nil),        // 11: prism.user.v1.UpdateUserStatusBulkRequest
+	(*BulkOperationResult)(nil),                // 12: prism.user.v1.BulkOperationResult
+	(*UpdateUserStatusBulkResponse)(nil),       // 13: prism.user.v1.UpdateUserStatusBulkResponse
+	(*UserInfoForToken)(nil),                   // 14: prism.user.v1.UserInfoForToken
+	(*GenerateImpersonationTokenRequest)(nil),  // 15: prism.user.v1.GenerateImpersonationTokenRequest
+	(*GenerateImpersonationTokenResponse)(nil), // 16: prism.user.v1.GenerateImpersonationTokenResponse
+	(*timestamppb.Timestamp)(nil),              // 17: google.protobuf.Timestamp
 }
 var file_prism_user_v1_user_service_proto_depIdxs = []int32{
 	12, // 0: prism.user.v1.UpdateUserStatusBulkResponse.results:type_name -> prism.user.v1.BulkOperationResult
-	1,  // 1: prism.user.v1.UserService.GetUserAuthDetailsByEmail:input_type -> prism.user.v1.GetUserAuthDetailsByEmailRequest
-	2,  // 2: prism.user.v1.UserService.GetUserAuthDetailsByID:input_type -> prism.user.v1.GetUserAuthDetailsByIDRequest
-	0,  // 3: prism.user.v1.UserService.CreateUser:input_type -> prism.user.v1.CreateUserRequest
-	3,  // 4: prism.user.v1.UserService.CreateSocialUser:input_type -> prism.user.v1.CreateSocialUserRequest
-	5,  // 5: prism.user.v1.UserService.GetPermissionsForRole:input_type -> prism.user.v1.GetPermissionsForRoleRequest
-	7,  // 6: prism.user.v1.UserService.Enable2FA:input_type -> prism.user.v1.Enable2FARequest
-	9,  // 7: prism.user.v1.UserService.UpdatePassword:input_type -> prism.user.v1.UpdatePasswordRequest
-	11, // 8: prism.user.v1.UserService.UpdateUserStatusBulk:input_type -> prism.user.v1.UpdateUserStatusBulkRequest
-	4,  // 9: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4,  // 10: prism.user.v1.UserService.GetUserAuthDetailsByID:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4,  // 11: prism.user.v1.UserService.CreateUser:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4,  // 12: prism.user.v1.UserService.CreateSocialUser:output_type -> prism.user.v1.UserAuthDetailsResponse
-	6,  // 13: prism.user.v1.UserService.GetPermissionsForRole:output_type -> prism.user.v1.GetPermissionsForRoleResponse
-	8,  // 14: prism.user.v1.UserService.Enable2FA:output_type -> prism.user.v1.Enable2FAResponse
-	10, // 15: prism.user.v1.UserService.UpdatePassword:output_type -> prism.user.v1.UpdatePasswordResponse
-	13, // 16: prism.user.v1.UserService.UpdateUserStatusBulk:output_type -> prism.user.v1.UpdateUserStatusBulkResponse
-	9,  // [9:17] is the sub-list for method output_type
-	1,  // [1:9] is the sub-list for method input_type
-	1,  // [1:1] is the sub-list for extension type_name
-	1,  // [1:1] is the sub-list for extension extendee
-	0,  // [0:1] is the sub-list for field type_name
+	14, // 1: prism.user.v1.GenerateImpersonationTokenRequest.target_user:type_name -> prism.user.v1.UserInfoForToken
+	17, // 2: prism.user.v1.GenerateImpersonationTokenResponse.expires_at:type_name -> google.protobuf.Timestamp
+	1,  // 3: prism.user.v1.UserService.GetUserAuthDetailsByEmail:input_type -> prism.user.v1.GetUserAuthDetailsByEmailRequest
+	2,  // 4: prism.user.v1.UserService.GetUserAuthDetailsByID:input_type -> prism.user.v1.GetUserAuthDetailsByIDRequest
+	0,  // 5: prism.user.v1.UserService.CreateUser:input_type -> prism.user.v1.CreateUserRequest
+	3,  // 6: prism.user.v1.UserService.CreateSocialUser:input_type -> prism.user.v1.CreateSocialUserRequest
+	5,  // 7: prism.user.v1.UserService.GetPermissionsForRole:input_type -> prism.user.v1.GetPermissionsForRoleRequest
+	7,  // 8: prism.user.v1.UserService.Enable2FA:input_type -> prism.user.v1.Enable2FARequest
+	9,  // 9: prism.user.v1.UserService.UpdatePassword:input_type -> prism.user.v1.UpdatePasswordRequest
+	11, // 10: prism.user.v1.UserService.UpdateUserStatusBulk:input_type -> prism.user.v1.UpdateUserStatusBulkRequest
+	15, // 11: prism.user.v1.UserService.GenerateImpersonationToken:input_type -> prism.user.v1.GenerateImpersonationTokenRequest
+	4,  // 12: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4,  // 13: prism.user.v1.UserService.GetUserAuthDetailsByID:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4,  // 14: prism.user.v1.UserService.CreateUser:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4,  // 15: prism.user.v1.UserService.CreateSocialUser:output_type -> prism.user.v1.UserAuthDetailsResponse
+	6,  // 16: prism.user.v1.UserService.GetPermissionsForRole:output_type -> prism.user.v1.GetPermissionsForRoleResponse
+	8,  // 17: prism.user.v1.UserService.Enable2FA:output_type -> prism.user.v1.Enable2FAResponse
+	10, // 18: prism.user.v1.UserService.UpdatePassword:output_type -> prism.user.v1.UpdatePasswordResponse
+	13, // 19: prism.user.v1.UserService.UpdateUserStatusBulk:output_type -> prism.user.v1.UpdateUserStatusBulkResponse
+	16, // 20: prism.user.v1.UserService.GenerateImpersonationToken:output_type -> prism.user.v1.GenerateImpersonationTokenResponse
+	12, // [12:21] is the sub-list for method output_type
+	3,  // [3:12] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_prism_user_v1_user_service_proto_init() }
@@ -923,7 +1109,7 @@ func file_prism_user_v1_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_prism_user_v1_user_service_proto_rawDesc), len(file_prism_user_v1_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
