@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package prism.auth.v1;
+
+option go_package = "github.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/auth/v1;authv1";
+
+import "google/protobuf/timestamp.proto";
+
+// AuthService menyediakan RPC internal untuk otentikasi.
+service AuthService {
+  // Membuat token JWT untuk sesi impersonation.
+  rpc GenerateImpersonationToken(GenerateImpersonationTokenRequest) returns (GenerateImpersonationTokenResponse);
+}
+
+// Informasi minimal yang dibutuhkan auth-service untuk membuat token.
+message UserInfoForToken {
+  string id = 1;
+  string email = 2;
+  string role_name = 3;
+}
+
+message GenerateImpersonationTokenRequest {
+  UserInfoForToken target_user = 1; // Info user yang akan ditiru
+  string actor_id = 2;             // ID admin yang melakukan impersonasi
+}
+
+message GenerateImpersonationTokenResponse {
+  string access_token = 1;
+  google.protobuf.Timestamp expires_at = 2;
+}

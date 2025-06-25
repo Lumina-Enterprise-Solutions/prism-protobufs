@@ -19,15 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_GetUserAuthDetailsByEmail_FullMethodName  = "/prism.user.v1.UserService/GetUserAuthDetailsByEmail"
-	UserService_GetUserAuthDetailsByID_FullMethodName     = "/prism.user.v1.UserService/GetUserAuthDetailsByID"
-	UserService_CreateUser_FullMethodName                 = "/prism.user.v1.UserService/CreateUser"
-	UserService_CreateSocialUser_FullMethodName           = "/prism.user.v1.UserService/CreateSocialUser"
-	UserService_GetPermissionsForRole_FullMethodName      = "/prism.user.v1.UserService/GetPermissionsForRole"
-	UserService_Enable2FA_FullMethodName                  = "/prism.user.v1.UserService/Enable2FA"
-	UserService_UpdatePassword_FullMethodName             = "/prism.user.v1.UserService/UpdatePassword"
-	UserService_UpdateUserStatusBulk_FullMethodName       = "/prism.user.v1.UserService/UpdateUserStatusBulk"
-	UserService_GenerateImpersonationToken_FullMethodName = "/prism.user.v1.UserService/GenerateImpersonationToken"
+	UserService_GetUserAuthDetailsByEmail_FullMethodName = "/prism.user.v1.UserService/GetUserAuthDetailsByEmail"
+	UserService_GetUserAuthDetailsByID_FullMethodName    = "/prism.user.v1.UserService/GetUserAuthDetailsByID"
+	UserService_CreateUser_FullMethodName                = "/prism.user.v1.UserService/CreateUser"
+	UserService_CreateSocialUser_FullMethodName          = "/prism.user.v1.UserService/CreateSocialUser"
+	UserService_GetPermissionsForRole_FullMethodName     = "/prism.user.v1.UserService/GetPermissionsForRole"
+	UserService_Enable2FA_FullMethodName                 = "/prism.user.v1.UserService/Enable2FA"
+	UserService_UpdatePassword_FullMethodName            = "/prism.user.v1.UserService/UpdatePassword"
+	UserService_UpdateUserStatusBulk_FullMethodName      = "/prism.user.v1.UserService/UpdateUserStatusBulk"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -48,7 +47,6 @@ type UserServiceClient interface {
 	Enable2FA(ctx context.Context, in *Enable2FARequest, opts ...grpc.CallOption) (*Enable2FAResponse, error)
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error)
 	UpdateUserStatusBulk(ctx context.Context, in *UpdateUserStatusBulkRequest, opts ...grpc.CallOption) (*UpdateUserStatusBulkResponse, error)
-	GenerateImpersonationToken(ctx context.Context, in *GenerateImpersonationTokenRequest, opts ...grpc.CallOption) (*GenerateImpersonationTokenResponse, error)
 }
 
 type userServiceClient struct {
@@ -139,16 +137,6 @@ func (c *userServiceClient) UpdateUserStatusBulk(ctx context.Context, in *Update
 	return out, nil
 }
 
-func (c *userServiceClient) GenerateImpersonationToken(ctx context.Context, in *GenerateImpersonationTokenRequest, opts ...grpc.CallOption) (*GenerateImpersonationTokenResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GenerateImpersonationTokenResponse)
-	err := c.cc.Invoke(ctx, UserService_GenerateImpersonationToken_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -167,7 +155,6 @@ type UserServiceServer interface {
 	Enable2FA(context.Context, *Enable2FARequest) (*Enable2FAResponse, error)
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error)
 	UpdateUserStatusBulk(context.Context, *UpdateUserStatusBulkRequest) (*UpdateUserStatusBulkResponse, error)
-	GenerateImpersonationToken(context.Context, *GenerateImpersonationTokenRequest) (*GenerateImpersonationTokenResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -201,9 +188,6 @@ func (UnimplementedUserServiceServer) UpdatePassword(context.Context, *UpdatePas
 }
 func (UnimplementedUserServiceServer) UpdateUserStatusBulk(context.Context, *UpdateUserStatusBulkRequest) (*UpdateUserStatusBulkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserStatusBulk not implemented")
-}
-func (UnimplementedUserServiceServer) GenerateImpersonationToken(context.Context, *GenerateImpersonationTokenRequest) (*GenerateImpersonationTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GenerateImpersonationToken not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -370,24 +354,6 @@ func _UserService_UpdateUserStatusBulk_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_GenerateImpersonationToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GenerateImpersonationTokenRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).GenerateImpersonationToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_GenerateImpersonationToken_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GenerateImpersonationToken(ctx, req.(*GenerateImpersonationTokenRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -426,10 +392,6 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserStatusBulk",
 			Handler:    _UserService_UpdateUserStatusBulk_Handler,
-		},
-		{
-			MethodName: "GenerateImpersonationToken",
-			Handler:    _UserService_GenerateImpersonationToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
