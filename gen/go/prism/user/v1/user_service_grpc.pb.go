@@ -25,6 +25,7 @@ const (
 	UserService_CreateSocialUser_FullMethodName          = "/prism.user.v1.UserService/CreateSocialUser"
 	UserService_GetPermissionsForRole_FullMethodName     = "/prism.user.v1.UserService/GetPermissionsForRole"
 	UserService_Enable2FA_FullMethodName                 = "/prism.user.v1.UserService/Enable2FA"
+	UserService_UpdatePassword_FullMethodName            = "/prism.user.v1.UserService/UpdatePassword"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -43,6 +44,7 @@ type UserServiceClient interface {
 	CreateSocialUser(ctx context.Context, in *CreateSocialUserRequest, opts ...grpc.CallOption) (*UserAuthDetailsResponse, error)
 	GetPermissionsForRole(ctx context.Context, in *GetPermissionsForRoleRequest, opts ...grpc.CallOption) (*GetPermissionsForRoleResponse, error)
 	Enable2FA(ctx context.Context, in *Enable2FARequest, opts ...grpc.CallOption) (*Enable2FAResponse, error)
+	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error)
 }
 
 type userServiceClient struct {
@@ -113,6 +115,16 @@ func (c *userServiceClient) Enable2FA(ctx context.Context, in *Enable2FARequest,
 	return out, nil
 }
 
+func (c *userServiceClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdatePasswordResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdatePassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -129,6 +141,7 @@ type UserServiceServer interface {
 	CreateSocialUser(context.Context, *CreateSocialUserRequest) (*UserAuthDetailsResponse, error)
 	GetPermissionsForRole(context.Context, *GetPermissionsForRoleRequest) (*GetPermissionsForRoleResponse, error)
 	Enable2FA(context.Context, *Enable2FARequest) (*Enable2FAResponse, error)
+	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -156,6 +169,9 @@ func (UnimplementedUserServiceServer) GetPermissionsForRole(context.Context, *Ge
 }
 func (UnimplementedUserServiceServer) Enable2FA(context.Context, *Enable2FARequest) (*Enable2FAResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Enable2FA not implemented")
+}
+func (UnimplementedUserServiceServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -286,6 +302,24 @@ func _UserService_Enable2FA_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UpdatePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdatePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdatePassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdatePassword(ctx, req.(*UpdatePasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -316,6 +350,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Enable2FA",
 			Handler:    _UserService_Enable2FA_Handler,
+		},
+		{
+			MethodName: "UpdatePassword",
+			Handler:    _UserService_UpdatePassword_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -20,6 +20,7 @@ service UserService {
 
   rpc GetPermissionsForRole(GetPermissionsForRoleRequest) returns (GetPermissionsForRoleResponse);
   rpc Enable2FA(Enable2FARequest) returns (Enable2FAResponse);
+  rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
 }
 
 // === Messages ===
@@ -70,5 +71,12 @@ message Enable2FARequest {
 }
 
 message Enable2FAResponse {
+  bool success = 1;
+}
+message UpdatePasswordRequest {
+  string user_id = 1;
+  string new_password_hash = 2;
+}
+message UpdatePasswordResponse {
   bool success = 1;
 }

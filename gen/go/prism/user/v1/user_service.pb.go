@@ -515,6 +515,102 @@ func (x *Enable2FAResponse) GetSuccess() bool {
 	return false
 }
 
+type UpdatePasswordRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	UserId          string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	NewPasswordHash string                 `protobuf:"bytes,2,opt,name=new_password_hash,json=newPasswordHash,proto3" json:"new_password_hash,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UpdatePasswordRequest) Reset() {
+	*x = UpdatePasswordRequest{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePasswordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePasswordRequest) ProtoMessage() {}
+
+func (x *UpdatePasswordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePasswordRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePasswordRequest) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UpdatePasswordRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *UpdatePasswordRequest) GetNewPasswordHash() string {
+	if x != nil {
+		return x.NewPasswordHash
+	}
+	return ""
+}
+
+type UpdatePasswordResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePasswordResponse) Reset() {
+	*x = UpdatePasswordResponse{}
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePasswordResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePasswordResponse) ProtoMessage() {}
+
+func (x *UpdatePasswordResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_prism_user_v1_user_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePasswordResponse.ProtoReflect.Descriptor instead.
+func (*UpdatePasswordResponse) Descriptor() ([]byte, []int) {
+	return file_prism_user_v1_user_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *UpdatePasswordResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_prism_user_v1_user_service_proto protoreflect.FileDescriptor
 
 const file_prism_user_v1_user_service_proto_rawDesc = "" +
@@ -553,7 +649,12 @@ const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\vtotp_secret\x18\x02 \x01(\tR\n" +
 	"totpSecret\"-\n" +
 	"\x11Enable2FAResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xf3\x04\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\\\n" +
+	"\x15UpdatePasswordRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12*\n" +
+	"\x11new_password_hash\x18\x02 \x01(\tR\x0fnewPasswordHash\"2\n" +
+	"\x16UpdatePasswordResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\xd2\x05\n" +
 	"\vUserService\x12t\n" +
 	"\x19GetUserAuthDetailsByEmail\x12/.prism.user.v1.GetUserAuthDetailsByEmailRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12n\n" +
 	"\x16GetUserAuthDetailsByID\x12,.prism.user.v1.GetUserAuthDetailsByIDRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12V\n" +
@@ -561,7 +662,8 @@ const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"CreateUser\x12 .prism.user.v1.CreateUserRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12b\n" +
 	"\x10CreateSocialUser\x12&.prism.user.v1.CreateSocialUserRequest\x1a&.prism.user.v1.UserAuthDetailsResponse\x12r\n" +
 	"\x15GetPermissionsForRole\x12+.prism.user.v1.GetPermissionsForRoleRequest\x1a,.prism.user.v1.GetPermissionsForRoleResponse\x12N\n" +
-	"\tEnable2FA\x12\x1f.prism.user.v1.Enable2FARequest\x1a .prism.user.v1.Enable2FAResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
+	"\tEnable2FA\x12\x1f.prism.user.v1.Enable2FARequest\x1a .prism.user.v1.Enable2FAResponse\x12]\n" +
+	"\x0eUpdatePassword\x12$.prism.user.v1.UpdatePasswordRequest\x1a%.prism.user.v1.UpdatePasswordResponseBTZRgithub.com/Lumina-Enterprise-Solutions/prism-protobufs/gen/go/prism/user/v1;userv1b\x06proto3"
 
 var (
 	file_prism_user_v1_user_service_proto_rawDescOnce sync.Once
@@ -575,7 +677,7 @@ func file_prism_user_v1_user_service_proto_rawDescGZIP() []byte {
 	return file_prism_user_v1_user_service_proto_rawDescData
 }
 
-var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_prism_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_prism_user_v1_user_service_proto_goTypes = []any{
 	(*CreateUserRequest)(nil),                // 0: prism.user.v1.CreateUserRequest
 	(*GetUserAuthDetailsByEmailRequest)(nil), // 1: prism.user.v1.GetUserAuthDetailsByEmailRequest
@@ -586,25 +688,29 @@ var file_prism_user_v1_user_service_proto_goTypes = []any{
 	(*GetPermissionsForRoleResponse)(nil),    // 6: prism.user.v1.GetPermissionsForRoleResponse
 	(*Enable2FARequest)(nil),                 // 7: prism.user.v1.Enable2FARequest
 	(*Enable2FAResponse)(nil),                // 8: prism.user.v1.Enable2FAResponse
+	(*UpdatePasswordRequest)(nil),            // 9: prism.user.v1.UpdatePasswordRequest
+	(*UpdatePasswordResponse)(nil),           // 10: prism.user.v1.UpdatePasswordResponse
 }
 var file_prism_user_v1_user_service_proto_depIdxs = []int32{
-	1, // 0: prism.user.v1.UserService.GetUserAuthDetailsByEmail:input_type -> prism.user.v1.GetUserAuthDetailsByEmailRequest
-	2, // 1: prism.user.v1.UserService.GetUserAuthDetailsByID:input_type -> prism.user.v1.GetUserAuthDetailsByIDRequest
-	0, // 2: prism.user.v1.UserService.CreateUser:input_type -> prism.user.v1.CreateUserRequest
-	3, // 3: prism.user.v1.UserService.CreateSocialUser:input_type -> prism.user.v1.CreateSocialUserRequest
-	5, // 4: prism.user.v1.UserService.GetPermissionsForRole:input_type -> prism.user.v1.GetPermissionsForRoleRequest
-	7, // 5: prism.user.v1.UserService.Enable2FA:input_type -> prism.user.v1.Enable2FARequest
-	4, // 6: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4, // 7: prism.user.v1.UserService.GetUserAuthDetailsByID:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4, // 8: prism.user.v1.UserService.CreateUser:output_type -> prism.user.v1.UserAuthDetailsResponse
-	4, // 9: prism.user.v1.UserService.CreateSocialUser:output_type -> prism.user.v1.UserAuthDetailsResponse
-	6, // 10: prism.user.v1.UserService.GetPermissionsForRole:output_type -> prism.user.v1.GetPermissionsForRoleResponse
-	8, // 11: prism.user.v1.UserService.Enable2FA:output_type -> prism.user.v1.Enable2FAResponse
-	6, // [6:12] is the sub-list for method output_type
-	0, // [0:6] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1,  // 0: prism.user.v1.UserService.GetUserAuthDetailsByEmail:input_type -> prism.user.v1.GetUserAuthDetailsByEmailRequest
+	2,  // 1: prism.user.v1.UserService.GetUserAuthDetailsByID:input_type -> prism.user.v1.GetUserAuthDetailsByIDRequest
+	0,  // 2: prism.user.v1.UserService.CreateUser:input_type -> prism.user.v1.CreateUserRequest
+	3,  // 3: prism.user.v1.UserService.CreateSocialUser:input_type -> prism.user.v1.CreateSocialUserRequest
+	5,  // 4: prism.user.v1.UserService.GetPermissionsForRole:input_type -> prism.user.v1.GetPermissionsForRoleRequest
+	7,  // 5: prism.user.v1.UserService.Enable2FA:input_type -> prism.user.v1.Enable2FARequest
+	9,  // 6: prism.user.v1.UserService.UpdatePassword:input_type -> prism.user.v1.UpdatePasswordRequest
+	4,  // 7: prism.user.v1.UserService.GetUserAuthDetailsByEmail:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4,  // 8: prism.user.v1.UserService.GetUserAuthDetailsByID:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4,  // 9: prism.user.v1.UserService.CreateUser:output_type -> prism.user.v1.UserAuthDetailsResponse
+	4,  // 10: prism.user.v1.UserService.CreateSocialUser:output_type -> prism.user.v1.UserAuthDetailsResponse
+	6,  // 11: prism.user.v1.UserService.GetPermissionsForRole:output_type -> prism.user.v1.GetPermissionsForRoleResponse
+	8,  // 12: prism.user.v1.UserService.Enable2FA:output_type -> prism.user.v1.Enable2FAResponse
+	10, // 13: prism.user.v1.UserService.UpdatePassword:output_type -> prism.user.v1.UpdatePasswordResponse
+	7,  // [7:14] is the sub-list for method output_type
+	0,  // [0:7] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_prism_user_v1_user_service_proto_init() }
@@ -618,7 +724,7 @@ func file_prism_user_v1_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_prism_user_v1_user_service_proto_rawDesc), len(file_prism_user_v1_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
