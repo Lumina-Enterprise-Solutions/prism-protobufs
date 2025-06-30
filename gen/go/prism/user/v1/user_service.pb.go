@@ -28,6 +28,7 @@ type CreateUserRequest struct {
 	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"` // Auth service akan mengirim hash, bukan plain password
 	FirstName     string                 `protobuf:"bytes,3,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
 	LastName      string                 `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	Role          string                 `protobuf:"bytes,5,opt,name=role,proto3" json:"role,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -86,6 +87,13 @@ func (x *CreateUserRequest) GetFirstName() string {
 func (x *CreateUserRequest) GetLastName() string {
 	if x != nil {
 		return x.LastName
+	}
+	return ""
+}
+
+func (x *CreateUserRequest) GetRole() string {
+	if x != nil {
+		return x.Role
 	}
 	return ""
 }
@@ -795,13 +803,14 @@ var File_prism_user_v1_user_service_proto protoreflect.FileDescriptor
 
 const file_prism_user_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	" prism/user/v1/user_service.proto\x12\rprism.user.v1\"\x81\x01\n" +
+	" prism/user/v1/user_service.proto\x12\rprism.user.v1\"\x95\x01\n" +
 	"\x11CreateUserRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x1d\n" +
 	"\n" +
 	"first_name\x18\x03 \x01(\tR\tfirstName\x12\x1b\n" +
-	"\tlast_name\x18\x04 \x01(\tR\blastName\"8\n" +
+	"\tlast_name\x18\x04 \x01(\tR\blastName\x12\x12\n" +
+	"\x04role\x18\x05 \x01(\tR\x04role\"8\n" +
 	" GetUserAuthDetailsByEmailRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"/\n" +
 	"\x1dGetUserAuthDetailsByIDRequest\x12\x0e\n" +

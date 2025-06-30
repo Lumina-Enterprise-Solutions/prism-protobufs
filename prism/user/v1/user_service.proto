@@ -33,6 +33,7 @@ message CreateUserRequest {
   string password = 2; // Auth service akan mengirim hash, bukan plain password
   string first_name = 3;
   string last_name = 4;
+  string role = 5;
 }
 
 message GetUserAuthDetailsByEmailRequest {
